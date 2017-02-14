@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<style>
+#results { 
+    background-color: lightblue;
+    color: black;
+     font-style: oblique;
+
+    border: 5px solid red;
+
+
+
+}
+</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Crime Finder</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+
+    <!-- Header -->
+    <a name="about"></a>
+    <div class="intro-header">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>Crime Finder</h1>
+                        <h3>Created By Edgar and Chris</h3>
+                        <hr class="intro-divider">
+                        <ul class="list-inline intro-social-buttons">
+                            <li>
+                                <a href="https://twitter.com/Chicago_Police?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/ChicagoPoliceDepartment/" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/chicagopolicedepartment/" class="btn btn-default btn-lg"><i class="fa fa-instagram fa-fw"></i> <span class="network-name">Instagram</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+
+    <!-- Page Content -->
+
+	<a  name="services"></a>
+    <div class="content-section-a">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                   
+                    
+                    <h2 class="section-heading">Find The Crime Today</h2>
+                    <p> Chose a district below to find a set of crimes that were reported to that district</p>
+    
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    
+                    
+                </div>
+
+        
+        
+            <select id= "disNum">
+    <option value = "#placeholder"> Choose a District</option>
+    <option value="001">District 1 - Central</option>
+    <option value="002">District 2 - Wentworth </option>
+    <option value="003">District 3 - Grand Crossing</option>
+    <option value="004">District 4 - South Chicago</option>
+    <option value="005">District 5 - Calument </option>
+    <option value="006">District 6 - Gresham</option>
+    <option value="007">District 7 - Englewood</option>
+    <option value="008">District 8 - Chicago Lawn</option>
+    <option value="009">District 9 - Deering</option>
+    <option value="010">District 10 - Ogden</option>
+    <option value="011">District 11 - Harrison</option>
+    <option value="012">District 12 - Near West</option>
+    <option value="014">District 14 - Shakespeare</option>
+    <option value="015">District 15 - Austin</option>
+    <option value="016">District 16 - Jefferson Park</option>
+    <option value="017">District 17 - Albany Park</option>
+    <option value="018">District 18 - Near North</option>
+    <option value="019">District 19 - Town Hall</option>
+    <option value="020">District 20 - Lincoln</option>
+    <option value="022">District 22 - Morgan Park</option>
+    <option value="024">District 24 - Rogers Park</option>
+    <option value="025">District 25 - Grand Central</option>
+    </select>
+    
+        <button type="button" id="btnSearch" disabled="disabled">Search!</button>
+    </div>
+    
+    <!-- a div to store the results -->
+    <div id="results">
+        
+        
+        
+    </div>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        /*
+            This script retrieves towed vehicle data for the entered plate
+        */
+        
+       
+        $(function () {    // don't execute code until DOM is ready
+            /*
+                most code should wait for the button click event,
+                but creating and setting some variables *can* be 
+                done when the page loads
+            */
+
+            // api endpoint for the towed vehicle data
+            var baseURL = 'https://data.cityofchicago.org/resource/6zsd-86xi.json';
+            
+            // optional filters we're appending: 
+            var filters = '?district=';
+            
+            // the url; we'll append the plate number in button click
+            var url = baseURL + filters;   
+            
+            console.log (url);
+            
+            // start with button disabled
+            $("#btnSearch").attr("disabled", false);
+            
+            // enable button only if text in input box
+            $("#disNum").keyup(function(){   // change event doesn't work, so using keyup 
+                if ($("disNum").val() == "#placeholder") {   // if value is empty
+                    $("#btnSearch").attr("disabled", true)  // set disabled
+                }
+                else {
+                    $("#btnSearch").attr("disabled", false)
+                }
+            })
+            
+            
+            
+         
+           
+            // we want to get the data and display on button click
+            $("#btnSearch").on("click", function() {
+                
+                // each time we search, we need to clear the results
+                $("#results").html("");
+                
+               
+                //   and append to url in getJSON call
+                var dNum = $("#disNum").val();
+           
+                var urlWithParams = url + dNum;
+                console.log(urlWithParams);  // verify that it's being created correctly
+           
+                // jQuery command to retrieve json data
+                
+                $.getJSON(urlWithParams)       // append the plateNum
+                    .done (function (data) {    // execute this function when getJSON is done
+                        
+                        console.log(data);
+                        
+                        var numRecords = data.length;  // the length of the array
+                        
+                        // notify of number of records
+                        var message = 
+                            "<p>Records found: "
+                            + numRecords
+                            + "</p>"
+                        
+                        $("#results").append(message);
+                        
+                        
+                        // only loop records if count > 0
+                        if (numRecords > 0) {
+                            // loop through the records
+                            $.each (data , 
+                                function (index, value) {
+                                    // append content to the body 
+                                    var html = "<h2>" 
+                                        + value.primary_type+ " "
+                                        + "</h2>"
+                                        + "<p>" 
+                                        + "Date:  "
+                                        + value.date 
+                                        + "<br>"
+                                        + " Adress: "
+                                        + value.block
+                                        + "<br> Description:  "
+                                        + value.description
+                                        + "<br>District: "
+                                        + value.district
+                                        + " <a href='https://www.google.com/maps/place/" + " chicago police department District "
+                                        + value.district+ " '>" + "<br>"
+                                        + "Google Maps</a>" + "<p> Click on link to find the location of this District </p>" 
+                                        
+                                   
+                                   
+                                    $("#results").append(html);
+                                    
+                            
+                                
+                                }  // end of function
+                            
+                            ); // end of each loop                            
+                        
+                        }   // end of if statement
+
+                    })  // end of getJSON
+            
+            })  // end of button click event
+        
+        }) // end of jQuery wrapper
+        
+        
+    </script>
+
+</body>
+</html>
+
+                </div>
+            </div>
+
+        </div>
+    
+
+    </div>
+    <!-- /.content-section-b -->
+
+    <div class="content-section-a">
+
+        <div class="container">
+
+  
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+
+
+    
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
