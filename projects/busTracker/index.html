@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.parseXML demo</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<style>
+body
+{background-color:lightblue;}
+div {
+    width: 160;
+    padding: 10px;
+    border: 5px solid gray;
+    margin: 0;
+}
+</style>
+</head>
+<body>
+    <div id=bus>
+ 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
+      /* global $ */
+      
+        $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+        
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "zehKFaJzTxu3NBbF92jLCkJYz",
+                      "format": "json",
+                      "rt": "49,X49,152",
+                      "stpid" : "8417,12571",
+                      "direction" : "Northbound,Westbound",
+              }
+            }).done (function (data) {
+              console.log(data);
+              $("#bus").append("<h1>Bus Time</h1>");
+             
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#bus").append(
+                    "Route #" 
+                  + v.rt 
+                  + " / To "
+                  + v.des
+                  + "<br>"
+                  + "Direction: "
+                  + v.rtdir
+                  +"<br>"
+                  + "Time: "
+                  +v.prdctdn 
+                  + " Minutes"
+                  + "<br>"
+                  +"<br>");
+                
+              });
+
+            });
+        });
+            
+  
+</script>
+ 
+</body>
+</html>

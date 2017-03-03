@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.parseXML demo</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <div id=mateoisgod>
+ 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
+      /* global $ */
+      
+        $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+        
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "key=zehKFaJzTxu3NBbF92jLCkJYz",
+                      "format": "json",
+                      "rt": 49,
+                      "stpid" : 8195,
+                      "direction" : "Northbound",
+              }
+            }).done (function (data) {
+              console.log(data);
+              $("#mateoisgod").append("<h1>aviugvuil</h1>");
+             
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#mateoisgod").append("Route #" + v.rt + "<br>" + v.prdtm + "<br>");
+                
+              });
+
+            });
+        });
+            
+  
+</script>
+ 
+</body>
+</html>
