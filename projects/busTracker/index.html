@@ -37,13 +37,13 @@ div {
               data: {"apiEndpoint": apiEndpoint,
                       "key" : "zehKFaJzTxu3NBbF92jLCkJYz",
                       "format": "json",
-                      "rt": "49,X49,152",
-                      "stpid" : "8417,12571",
-                      "direction" : "Northbound,Westbound",
+                      "rt": "49,X49",
+                      "stpid" : "8417",
+                      "direction" : "Northbound",
               }
             }).done (function (data) {
               console.log(data);
-              $("#bus").append("<h1>Bus Time</h1>");
+              $("#bus").append("<h1>Route 49/X49 Northbound</h1>");
              
               $.each(data["bustime-response"]["prd"], function(i,v) {
                   $("#bus").append(
@@ -68,6 +68,152 @@ div {
             
   
 </script>
- 
+ <script>
+      /* global $ */
+      
+        $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+        
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "zehKFaJzTxu3NBbF92jLCkJYz",
+                      "format": "json",
+                      "rt": "49,X49",
+                      "stpid" : "8195",
+                      "direction" : "Southbound",
+              }
+            }).done (function (data) {
+              console.log(data);
+              $("#bus").append("<h1>Route 49/X49 Southbound</h1>");
+             
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#bus").append(
+                    "Route #" 
+                  + v.rt 
+                  + " / To "
+                  + v.des
+                  + "<br>"
+                  + "Direction: "
+                  + v.rtdir
+                  +"<br>"
+                  + "Time: "
+                  +v.prdctdn 
+                  + " Minutes"
+                  + "<br>"
+                  +"<br>");
+                
+              });
+
+            });
+        });
+            
+  
+</script>
+ <script>
+      /* global $ */
+      
+        $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+        
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "zehKFaJzTxu3NBbF92jLCkJYz",
+                      "format": "json",
+                      "rt": "152",
+                      "stpid" : "12571",
+                      "direction" : "Westbound",
+              }
+            }).done (function (data) {
+              console.log(data);
+              $("#bus").append("<h1>Route 152 Westbound</h1>");
+             
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#bus").append(
+                    "Route #" 
+                  + v.rt 
+                  + " / To "
+                  + v.des
+                  + "<br>"
+                  + "Direction: "
+                  + v.rtdir
+                  +"<br>"
+                  + "Time: "
+                  +v.prdctdn 
+                  + " Minutes"
+                  + "<br>"
+                  +"<br>");
+                
+              });
+
+            });
+        });
+            
+  
+</script>
+<script>
+      /* global $ */
+      
+        $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+        
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "zehKFaJzTxu3NBbF92jLCkJYz",
+                      "format": "json",
+                      "rt": "152",
+                      "stpid" : "12525",
+                      "direction" : "Eastbound",
+              }
+            }).done (function (data) {
+              console.log(data);
+              $("#bus").append("<h1>Route 152 Eastbound</h1>");
+             
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#bus").append(
+                    "Route #" 
+                  + v.rt 
+                  + " / To "
+                  + v.des
+                  + "<br>"
+                  + "Direction: "
+                  + v.rtdir
+                  +"<br>"
+                  + "Time: "
+                  +v.prdctdn 
+                  + " Minutes"
+                  + "<br>"
+                  +"<br>");
+                
+              });
+
+            });
+        });
+            
+  
+</script>
 </body>
 </html>
