@@ -3,12 +3,12 @@
   "name": "Mom's Information",
   "icons": [
     {
-      "src":"images/Family-Silhouette-3.jpg",
-      "sizes": "192x192",
-      "type": "image/jpg"
+      "src":"Home-icon.png",
+      "sizes": "144x144",
+      "type": "image/png"
     }
   ],
-  "start_url": "./?utm_source=homescreen",
+   "start_url": "./index.html?utm_source=homescreen",
   "background_color": "#000",
   "Theme_color": "#536878",
   "display": "standalone"
