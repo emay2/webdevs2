@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>bus tracker</title>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+    <style>
+      .delete {color: white; background-color:red;}
+    </style>
+  <body>
+    <table>
+    <tr><td>49 Western Ave, Addison Stop</td><td><button class="delete" id="49">Remove</button></td></tr>
+    </table>
+  
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      var routes = [];
+      var stops = [];
+      
+      routes.push("52");
+      routes.push("152");
+      routes.push("49");
+     
+      
+      console.log(routes);
+      console.log(routes.toString());
+      
+    
+    
+    
+    
+      $(function() {
+        $(".delete").on("click", function() {
+          var itemId = $(this).attr("id");
+          alert (itemId);
+        });
+        
+        
+      });
+    </script>
+  </body>
+</html>

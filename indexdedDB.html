@@ -56,48 +56,104 @@
     <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
     
     <!-- Include jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script>
-  $(function() {
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
+      /* global $ */
+      
+        $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+        
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "zehKFaJzTxu3NBbF92jLCkJYz",
+                      "format": "json",
+                      "rt": "49,X49",
+                      "stpid" : "8417",
+                      "direction" : "Northbound",
+              }
+            }).done (function (data) {
+              console.log(data);
+              $("#bus").append("<h1>Route 49/X49 Northbound</h1>");
+             
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#bus").append(
+                    "Route #" 
+                  + v.rt 
+                  + " / To "
+                  + v.des
+                  + "<br>"
+                  + "Direction: "
+                  + v.rtdir
+                  +"<br>"
+                  + "Time: "
+                  +v.prdctdn 
+                  + " Minutes"
+                  + "<br>"
+                  +"<br>");
+                
+              });
 
-    var db = new Dexie("employeeDB");
-    db.version(1).stores({
-      employees: '++id,name,department,title,salary'
-    });
+            });
+        });
+            
+  
+</script>
+ <script>
+      /* global $ */
+      
+        $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+        
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "zehKFaJzTxu3NBbF92jLCkJYz",
+                      "format": "json",
+                      "rt": "49,X49",
+                      "stpid" : "8195",
+                      "direction" : "Southbound",
+              }
+            }).done (function (data) {
+              console.log(data);
+              $("#bus").append("<h1>Route 49/X49 Southbound</h1>");
+             
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#bus").append(
+                    "Route #" 
+                  + v.rt 
+                  + " / To "
+                  + v.des
+                  + "<br>"
+                  + "Direction: "
+                  + v.rtdir
+                  +"<br>"
+                  + "Time: "
+                  +v.prdctdn 
+                  + " Minutes"
+                  + "<br>"
+                  +"<br>");
+                
+              });
 
-    db.employees.count().then(function(count) {
-      console.log(count);
-
-      // only if the table is empty do we need to grab the city employee data
-      if (count == 0) {
-        /*
-          your AJAX call and the callback function go here
-        */
-      }
-
-    });
-
-
-  });
-
-
-
-
-
-
-  $("#btnShow").on("click", function() {
-    displayEmployees();
-  })
-
-
-  function displayEmployees() {
-    console.log(strQuery);
-    db.employees.each(function(employee) {
-      var html = "<strong>" + employee.name + "</strong>"
-      html += "<br>" + employee.department + "<br><br>";
-      $("#display").append(html);
-    })
-  }
+            });
+        });
+            
+  
 </script>
     
     
