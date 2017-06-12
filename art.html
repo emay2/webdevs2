@@ -1,21 +1,90 @@
 <!DOCTYPE html>
 <html>
- 
-<head>
-  <title>Simple Example</title>
-  <style>
-    canvas {
-      border: #333 10px solid;
-    }
-  </style>
-</head>
- 
-<body>
-  <canvas id="myCanvas" width="550px" height="350px"></canvas>
- 
-  <script>
-  </script>
- 
-</body>
- 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    
+  </head>
+  <body>
+    <!-- 
+      need a canvas element here
+    
+    -->
+    
+    
+    
+    <script>
+      var livesRemaining = 3;
+      var score = 0;
+      var level = 1;
+      var paused = false;
+      var player = {x: 0, y: 0, costume: "", speed: 1};
+      var harm = {x: 0, y: 0, costume: "", speed: 1};
+      var benefit = {x: 0, y: 0, costume: ""};
+      /*
+      
+        main animation loop
+      
+      */
+     function drawTriangle() {
+// the triangle
+context.beginPath();
+context.moveTo(200, 100);
+context.lineTo(170, 150);
+context.lineTo(230, 150);
+context.closePath();
+
+// the outline
+context.lineWidth = 10;
+context.strokeStyle = "rgba(102, 102, 102, 1)";
+context.stroke();
+
+// the fill color
+context.fillStyle = "rgba(255, 204, 0, 1)";
+context.fill();
+}
+drawTriangle();
+        
+        // update harm and benefit y coordinates
+        
+        // draw background
+        
+        //  draw player
+        
+        // draw harm 
+        
+        // check for and handle edge condition
+        
+        // check for and handle harm collision
+      
+        // draw benefit
+        
+        // check for and handle edge condition
+        
+        // check for benefit collision
+        
+        // draw text (lives and score)
+        
+        
+        
+        //  if the game has not been paused, 
+        if (!paused) {
+          requestAnimationFrame(animate);
+        }
+        
+      }
+      
+      
+      //  event handler for moving player
+      //    use onKeyPress event, and change the player.y value based on the up/down keys
+      
+      
+      
+      
+      
+    </script>
+    
+    
+  </body>
 </html>

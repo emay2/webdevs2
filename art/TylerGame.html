@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <style>
+   
+            canvas {
+              border:3px light blue;
+                 background-image: url("of-canvas.png");
+            }
+            #player {
+              display:none;
+            }
+          
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="600" height="600">
+    <img id="tyler" src="images/tylerrr.png"> 
+    <img id="happy" src="images/happy-tyler.png">
+    <img id="bs" src="images/bs-tyler.png">
+    </canvas>
+    
+    <script>
+      var livesRemaining = 3;
+      var score = 0;
+      var level = 1;
+      var paused = false;
+      /*
+      
+        main animation loop
+      */
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+      
+      var image = document.getElementById("tyler");
+      var tylerX = 20 ;
+      var tylerY = 100 ;
+      
+      var image1 = document.getElementById("happy");
+      var happyX = 200 ;
+      var happyY = Math.floor(Math.random() * 500);
+      
+      var image2 = document.getElementById("bs");
+      var bsX = 200;
+      var bsY = Math.floor(Math.random() * 500);
+      
+      function animate() {
+        // clear canvas
+          ctx.clearRect(0,0,canvas.width,canvas.height); 
+        
+        // draw background
+        
+        // draw player
+          ctx.drawImage(image, tylerX, tylerY, 50, 50);
+        // draw harm
+          ctx.drawImage(image2, bsX, bsY, 50, 50);
+          bsX = bsX - 1.5;
+        // check for and handle edge condition
+          if (bsX < 0)
+          {
+            bsX = canvas.width;
+            bsY = Math.floor(Math.random() * 560);
+          }
+        // draw benefit
+           ctx.drawImage(image1, happyX, happyY, 50, 50);
+           happyX = happyX - 1.5;
+        // check for and handle edge condition
+          if (happyX < 0 )
+          {
+            happyX = canvas.width;
+            happyY = Math.floor(Math.random() * 560);
+          }   
+        // check for harm collision
+          if (tylerX < bsX + 35 && tylerX + 35 > bsX && tylerY < bsY + 35 && tylerY + 35 > bsY) 
+          {
+            livesRemaining = livesRemaining - 1;
+            bsX = canvas.width;
+            bsY = Math.floor(Math.random() * 560);
+          } 
+          if (livesRemaining <= 0)
+          {
+            paused = true;  
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+          }  
+        // check for benefit collision
+          if (tylerX < happyX + 35 && tylerX + 35 > happyX && tylerY < happyY + 35 && tylerY + 35 > happyY) 
+          {
+            score = score + 100;
+            happyX = canvas.width;
+            happyY = Math.floor(Math.random() * 560); 
+          }
+        // draw text (lives and score)
+          ctx.font = "15px Arial";
+          ctx.fillStyle = "white";
+          ctx.fillText("Lives: " + livesRemaining, 10, 30);
+          
+          ctx.font = "15px Arial";
+          ctx.fillStyle = "white";
+          ctx.fillText("Score: " + score, 10, 60);
+          
+        //  if the game has not been paused, 
+          if (!paused) {
+            requestAnimationFrame(animate);
+          }
+        
+      }
+          animate();
+          
+      //  event handler for moving player
+      //    use onKeyPress event, and change the player.y value based on the up/down keys
+       document.addEventListener("keydown", move );
+        function move (e) {
+         
+          if (e.keyCode == 40){
+            tylerY = tylerY + 10 ;
+          }
+          if (e.keyCode == 38){
+            tylerY = tylerY - 10 ;
+          }
+           
+        }
+      
+      
+      
+      
+    </script>
+    
+    
+  </body>
+</html>
